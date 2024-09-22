@@ -1,0 +1,5 @@
+# ninja log v6
+2324	2720	7484775119534246	Assignment.exe	5ef0bc7484d01f38
+161	4255	7487495533209253	CMakeFiles/Assignment.dir/main.cpp.obj	e957660b836cefe5
+197	7379	7487495533579340	CMakeFiles/Assignment.dir/dataExtractor.cpp.obj	910aa38f448f55e2
+13	1007	7487502873264572	build.ninja	1e8365b0e753d242
