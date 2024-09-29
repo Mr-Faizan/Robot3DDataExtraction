@@ -7,4 +7,7 @@ add_executable(Assignment main.cpp
         parser.cpp
         parser.h
         dataExtractor.cpp
+        jsonParser.cpp
+        YamlParser.cpp
+        dataProcessing.cpp
 )
