@@ -1,0 +1,107 @@
+{
+    "geometryMatrix": {
+        "J1": [
+            {
+                "GeometryFile": "Geometry_13"
+            }
+        ],
+        "J2": [
+            {
+                "GeometryFile": "Geometry_1",
+                "Matrix": "0.718459749572 0 -0.695568535979 0 0 1 0 0 0.695568535979 0 0.718459749572 0 -401.527796755 0 -184.714451067 1 "
+            }
+        ],
+        "J3": [
+            {
+                "GeometryFile": "Geometry_8",
+                "Matrix": "0.718459749572 0 -0.695568535979 0 0 1 0 0 0.695568535979 0 0.718459749572 0 -401.527796755 0 -184.714451067 1 "
+            }
+        ],
+        "J4": [
+            {
+                "GeometryFile": "Geometry_14",
+                "Matrix": "0.718459749572 0 -0.695568535979 0 0 1 0 0 0.695568535979 0 0.718459749572 0 -401.527796755 0 -184.714451067 1 "
+            }
+        ],
+        "J5": [
+            {
+                "GeometryFile": "Geometry_4",
+                "Matrix": "0.12690299367 -0.991915132558 -2.39339490886e-08 0 1.88600351001e-07 6.12303176911e-17 1 0 -0.991915132558 -0.12690299367 1.87075542172e-07 0 1142.99071816 543.82667541 -0.000215568450669 1 "
+            }
+        ],
+        "J6": [
+            {
+                "GeometryFile": "Geometry_5",
+                "Matrix": "1.59201542577e-09 0.12690299367 0.991915132558 0 -1 1.25451368776e-08 -2.9851914138e-33 0 -1.24437111089e-08 -0.991915132558 0.12690299367 0 1.43389750091e-05 1142.99071816 -633.32667541 1 "
+            }
+        ],
+        "mountplate": [
+            {
+                "GeometryFile": "FlangeFrame",
+                "Matrix": "1.59201542577e-09 0.12690299367 0.991915132558 0 -1 1.25451368776e-08 -2.9851914138e-33 0 -1.24437111089e-08 -0.991915132558 0.12690299367 0 1.43389750091e-05 1142.99071816 -633.32667541 1 "
+            }
+        ]
+    },
+    "jointMap": {
+        "Joint 0": "J1",
+        "Joint 1": "J2",
+        "Joint 2": "J3",
+        "Joint 3": "J4",
+        "Joint 4": "J5",
+        "Joint 5": "J6"
+    },
+    "jointOffset": {
+        "J1": "Rz(-Kinematics::JointZeroOffset1)",
+        "J2": "Tz(Kinematics::L01Z).Tx(Kinematics::L12X).Ty(Kinematics::L12Y).Ry(-Kinematics::JointZeroOffset2)",
+        "J3": "Tx(Kinematics::L23X).Tz(Kinematics::L23Z).Ry(-Kinematics::JointZeroOffset3)",
+        "J4": "Tx(Kinematics::L34X).Tz(Kinematics::L34Z).Rz(-Kinematics::JointZeroOffset4)",
+        "J5": "Rx(Kinematics::A45).Tx(Kinematics::L45X).Tz(Kinematics::L45Z).Rz(-Kinematics::JointZeroOffset5)",
+        "J6": "Rx(-Kinematics::A45).Tx(Kinematics::L56X).Tz(Kinematics::L56Z).Rz(-Kinematics::JointZeroOffset6)"
+    },
+    "kinematics": {
+        "A45": -90,
+        "Config1": "Config_1",
+        "Config2": "Config_2",
+        "Config3": "Config_3",
+        "Config4": "Config_4",
+        "Config5": "Config_5",
+        "Config6": "Config_6",
+        "Config7": "Config_7",
+        "Config8": "Config_8",
+        "Coupling23": 0,
+        "Coupling456": 0,
+        "ElbowValid": 1,
+        "ExtendedPositionTolerance": 1,
+        "Id": 1,
+        "JointSign1": -1,
+        "JointSign2": 1,
+        "JointSign3": 1,
+        "JointSign4": -1,
+        "JointSign5": 1,
+        "JointSign6": 1,
+        "JointZeroOffset1": 0,
+        "JointZeroOffset2": 0,
+        "JointZeroOffset3": -90,
+        "JointZeroOffset4": 0,
+        "JointZeroOffset5": 0,
+        "JointZeroOffset6": 0,
+        "L01Z": 412,
+        "L12X": 160,
+        "L12Y": 0,
+        "L23X": 0,
+        "L23Z": 680,
+        "L34X": -210,
+        "L34Z": 740,
+        "L45X": 0,
+        "L45Z": 0,
+        "L56X": 0,
+        "L56Z": 89.5,
+        "Name": "Kinematics",
+        "PalletizingMode": 0,
+        "PalletizingNormal": "0 0 -1 1",
+        "PolarSingularityTolerance": 1,
+        "ShoulderValid": 1,
+        "WristSingularityTolerance": 0.1,
+        "WristValid": 1
+    }
+}

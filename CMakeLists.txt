@@ -10,4 +10,5 @@ add_executable(Assignment main.cpp
         jsonParser.cpp
         YamlParser.cpp
         dataProcessing.cpp
+        RobotConfigParser.cpp
 )
