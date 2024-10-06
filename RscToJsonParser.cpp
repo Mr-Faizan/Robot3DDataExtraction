@@ -1,21 +1,23 @@
+
+#include "RscToJsonParser.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <nlohmann/json.hpp>
 
-// Need to install nlohmann/json library
+// I Need to install nlohmann/json library
 
 using namespace std;
 using json = nlohmann::json;
 
-// In this RobotConfigParser class i will extract the most important data from the .rsc file and convert it to a json file.
+// In this RscToJsonParser class i will extract the most important data from the .rsc file and convert it to a json file.
 // This data will be used for the robot simulation in QT 3D Studio.
-class RobotConfigParser {
-public:
-    RobotConfigParser(const string& filename) : filename(filename) {}
+
+
+    RscToJsonParser::RscToJsonParser(const string& filename) : filename(filename) {}
 
     // This function will parse the .rsc file and return the json object
-    json parse() {
+    json RscToJsonParser::parse() {
         ifstream file(filename);
         if (!file) {
             throw runtime_error("Unable to open file " + filename);
@@ -38,30 +40,10 @@ public:
     }
 
 
-private:
-    string filename;
-    json kinematics;
-    json jointMap;
-    json jointOffset;
-    json geometryMatrix;
-    json rSimLinkObject;
-    string currentJointName;
-    string currentOffsetExpression;
-    string currentRSimLinkName;
-    string currentGeoFeatureName;
-    string currentMatrix;
-    bool isKinematicsSection = false;
-    bool isJointMapSection = false;
-    bool isDofSection = false;
-    bool foundNameInDOFsection = false;
-    bool isDofFixedSection = false;
-    bool isOffsetSection = false;
-    bool captureNextOffset = false;
-    bool isGeometryMatrixSection = false;
-    bool isGeoFeatureSection = false;
+
 
     // This function will process the line and extract the data
-    void processLine(string& line, ifstream& file) {
+    void RscToJsonParser::processLine(string& line, ifstream& file) {
         line.erase(0, line.find_first_not_of(" \t")); // Trim leading whitespace
 
         if (line.find("Functionality \"rKinArticulated2\"") != string::npos) {
@@ -117,7 +99,7 @@ private:
     }
 
     // This function will process the Kinematics and JointMap section
-    void processKinematicsOrJointMapSection(const string& line) {
+    void RscToJsonParser::processKinematicsOrJointMapSection(const string& line) {
         if (line.find("}") != string::npos) {
             if (isKinematicsSection) {
                 isKinematicsSection = false;
@@ -174,7 +156,7 @@ private:
     }
 
     // This function will process the other sections like Dof, Offset and GeometryMatrix
-    void processOtherSections(const string& line, ifstream& file) {
+    void RscToJsonParser::processOtherSections(const string& line, ifstream& file) {
         if (isDofSection) {
             if (line.find("}") != string::npos) {
                 isDofSection = false;
@@ -201,7 +183,7 @@ private:
     }
 
     // This function will process the Offset section
-    void processOffsetSection(const string& line, ifstream& file) {
+    void RscToJsonParser::processOffsetSection(const string& line, ifstream& file) {
         string offsetLine = line;
         offsetLine.erase(0, offsetLine.find_first_not_of(" \t")); // Trim leading whitespace
         if (offsetLine.find("Expression") != string::npos) {
@@ -236,7 +218,7 @@ private:
     }
 
     // This function will process the GeometryMatrix section
-    void processGeometryMatrixSection(const string& line) {
+    void RscToJsonParser::processGeometryMatrixSection(const string& line) {
 
         // As I need three things from this section that is Joint Name, Geometry File and Matrix.
         // Finishing at VariableSpace is bad approach but I dont want to process long lines that i dont need.
@@ -294,23 +276,4 @@ private:
             }
         }
     }
-};
 
-int main() {
-    try {
-        RobotConfigParser parser("data/component.rsc");
-        json rscJson = parser.parse();
-
-        // Now It will be very easy for me to use this JSON object in QT 3D Studio.
-        ofstream outputFile("output/newClasscomponent.json");
-        outputFile << rscJson.dump(4); // adding 4 spaces in JSON output
-        outputFile.close();
-
-        cout << "Conversion completed successfully!" << endl;
-    } catch (const exception& e) {
-        cerr << "Error: " << e.what() << endl;
-        return 1;
-    }
-
-    return 0;
-}

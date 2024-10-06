@@ -1,7 +1,7 @@
 //
 // Created by Faizan Ahmed on 9/28/2024.
 //
-
+#include "DHParameterCalculator.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -11,12 +11,11 @@
 using namespace std;
 using json = nlohmann::json;
 
-class DHParameterCalculator {
-public:
-    DHParameterCalculator(const std::string& inputFilename, const std::string& outputFilename)
+
+    DHParameterCalculator::DHParameterCalculator(const std::string& inputFilename, const std::string& outputFilename)
         : inputFilename(inputFilename), outputFilename(outputFilename) {}
 
-    void calculateDHParameters() {
+    void DHParameterCalculator::calculateDHParameters() {
         std::ifstream inputFile(inputFilename);
         if (!inputFile) {
             throw std::runtime_error("Unable to open input file " + inputFilename);
@@ -30,7 +29,7 @@ public:
 
         std::ofstream outputFile(outputFilename);
         if (!outputFile) {
-            throw std::runtime_error("Unable to open output file " + outputFilename);
+            throw std::runtime_error("Unable to open jsonDir file " + outputFilename);
         }
         outputFile << dhParameters.dump(4); // Pretty print with 4 spaces indent
         outputFile.close();
@@ -38,11 +37,8 @@ public:
         std::cout << "DH parameters calculation completed successfully!" << std::endl;
     }
 
-private:
-    std::string inputFilename;
-    std::string outputFilename;
 
-    json computeDHParameters(const json& inputData) {
+    json DHParameterCalculator::computeDHParameters(const json& inputData) {
     json dhParameters;
     const auto& kinematics = inputData["kinematics"];
 
@@ -53,7 +49,7 @@ private:
 
         try {
 
-            double alpha = 0, a = 0, d = 0, theta = 0;
+            double Rx = 0, Tx = 0, Tz = 0, Rz = 0;
 
             // Parse the expression
             std::istringstream exprStream(expression);
@@ -69,7 +65,7 @@ private:
                         key = key.substr(1);
                     }
                     key = key.substr(key.find("::") + 2); // Remove "Kinematics::"
-                    d = sign * kinematics.at(key).get<double>();
+                    Tz = sign * kinematics.at(key).get<double>();
                 } else if (token.find("Tx(") != std::string::npos) {
                     key = token.substr(3, token.size() - 4);
                     if (key[0] == '-') {
@@ -77,7 +73,7 @@ private:
                         key = key.substr(1);
                     }
                     key = key.substr(key.find("::") + 2);
-                    a = sign * kinematics.at(key).get<double>();
+                    Tx = sign * kinematics.at(key).get<double>();
                 } else if (token.find("Ty(") != std::string::npos) {
                     key = token.substr(3, token.size() - 4);
                     if (key[0] == '-') {
@@ -93,7 +89,7 @@ private:
                         key = key.substr(1);
                     }
                     key = key.substr(key.find("::") + 2);
-                    theta = sign * kinematics.at(key).get<double>();
+                    Rz = sign * kinematics.at(key).get<double>();
                 } else if (token.find("Rx(") != std::string::npos) {
                     key = token.substr(3, token.size() - 4);
                     if (key[0] == '-') {
@@ -101,7 +97,7 @@ private:
                         key = key.substr(1);
                     }
                     key = key.substr(key.find("::") + 2); // Remove "Kinematics::"
-                    alpha = sign * kinematics.at(key).get<double>();
+                    Rx = sign * kinematics.at(key).get<double>();
                 } else if (token.find("Ry(") != std::string::npos) {
                     key = token.substr(3, token.size() - 4);
                     if (key[0] == '-') {
@@ -114,10 +110,10 @@ private:
             }
 
             // Now Join the pieces of puzzle.
-            jointData["alpha"] = alpha;
-            jointData["a"] = a;
-            jointData["d"] = d;
-            jointData["theta"] = theta;
+            jointData["Rx"] = Rx;
+            jointData["Tx"] = Tx;
+            jointData["Tz"] = Tz;
+            jointData["Rz"] = Rz;
             dhParameters[jointName] = jointData;
         } catch (const std::exception& e) {
             std::cerr << "Error processing joint " << jointName << ": " << e.what() << std::endl;
@@ -125,20 +121,5 @@ private:
     }
 
     return dhParameters;
-}
-
-
-};
-
-int main() {
-    try {
-        DHParameterCalculator calculator("output/newClasscomponent.json", "output/dhParameters.json");
-        calculator.calculateDHParameters();
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
-
-    return 0;
 }
 
