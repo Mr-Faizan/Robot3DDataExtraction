@@ -3,11 +3,13 @@
 
 #include <string>
 #include <nlohmann/json.hpp>
+#include <regex>
 
 class RscToJsonParser {
 public:
     RscToJsonParser(const std::string& filename);
     nlohmann::json parse();
+    static void processAllFiles(const std::string& unzipDir, const std::string& jsonDir);
 
 private:
     std::string filename;

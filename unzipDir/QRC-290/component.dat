@@ -1,0 +1,86 @@
+VcId "772115ba-1dff-41c5-8898-6f7704afecb8"
+Revision 14
+DetailedRevision "4.3.1.14"
+Tags "Arc Welding;Articulated;Small"
+KeywordMap
+{
+  Keyword
+  {
+    Key "ModelType"
+    Value "Component"
+  }
+  Keyword
+  {
+    Key "Type"
+    Value "Robots"
+  }
+  Keyword
+  {
+    Key "Manufacturer"
+    Value "CLOOS"
+  }
+  Keyword
+  {
+    Key "MaxPayload"
+    Value "4"
+  }
+  Keyword
+  {
+    Key "Author"
+    Value "Visual Components"
+  }
+  Keyword
+  {
+    Key "Reach"
+    Value "3740"
+  }
+  Keyword
+  {
+    Key "ImageUri"
+    Value "component_icon_preview.tga"
+  }
+  Keyword
+  {
+    Key "Modified"
+    Value "8/23/2021 11:15:05 AM"
+  }
+  Keyword
+  {
+    Key "IsDeprecated"
+    Value "False"
+  }
+  Keyword
+  {
+    Key "ThumbnailUri"
+    Value "layout_icon.tga"
+  }
+}
+Items
+{
+  Item
+  {
+    Name "QRC-290"
+    Icon "layout_icon.tga"
+    PreviewIcon "component_icon_preview.tga"
+    Description "\nThe robots can be programmed in the programming tab. In t\
+he case of conceptual layouts, the robots can utilize robot controllers to a\
+utomatically perform tasks.\nAll the robots have a similar component structu\
+re and therefore they mostly support same features and they are easily repla\
+ceable with each other.\n\n### How to use – Program tab ###\nMove the robo\
+t with the “Jog” tool and create the motion statements in the “Program\
+ Editor”. The created statements will have configurable properties as well\
+.\nFor grasping/releasing products, changing tools, and other actions., see \
+the “Signal Actions” and “Actions Configurations” properties for fur\
+ther customization.\n\n### How to use – Robot Controller ###\nRobot contro\
+llers, such as, “Process Modeling Robot Controller” component can be use\
+d to automate robot programming. See our academy lessons for further instruc\
+tions.\n\n### How to use – OLP ###\nWe provide post-processors and pre-pro\
+cessors for continuously expanding group of robot vendors in our forum. In a\
+ddition, we have some advanced robot statements available in the forum.\n\n#\
+## Key Properties ###\nExecutor::IsEnabled = Determines if the robot is turn\
+ed ON / OFF\nExecutor::IsLooping = Determines if the robot program is looped\
+ when the program is run in programming tab\n    "
+    Logo ""
+    Uri "component.rsc"
+  }
+}

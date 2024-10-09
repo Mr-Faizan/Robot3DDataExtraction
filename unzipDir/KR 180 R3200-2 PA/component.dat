@@ -1,0 +1,79 @@
+VcId "b705201b-2d21-4888-933b-0a611a7d0f5f"
+Revision 98
+DetailedRevision "3.1.2.98"
+Tags "Parallelogram"
+KeywordMap
+{
+  Keyword
+  {
+    Key "ModelType"
+    Value "Component"
+  }
+  Keyword
+  {
+    Key "Type"
+    Value "Robots"
+  }
+  Keyword
+  {
+    Key "Manufacturer"
+    Value "KUKA"
+  }
+  Keyword
+  {
+    Key "MaxPayload"
+    Value "180"
+  }
+  Keyword
+  {
+    Key "Author"
+    Value "KUKA Deutschland GmbH"
+  }
+  Keyword
+  {
+    Key "Email"
+    Value "Simulation.Robotics.De@kuka.com"
+  }
+  Keyword
+  {
+    Key "Website"
+    Value "www.kuka.com"
+  }
+  Keyword
+  {
+    Key "Reach"
+    Value "3200"
+  }
+  Keyword
+  {
+    Key "ImageUri"
+    Value "component_icon_preview.tga"
+  }
+  Keyword
+  {
+    Key "Modified"
+    Value "3/23/2022 10:19:59 AM"
+  }
+  Keyword
+  {
+    Key "IsDeprecated"
+    Value "False"
+  }
+  Keyword
+  {
+    Key "ThumbnailUri"
+    Value "layout_icon.tga"
+  }
+}
+Items
+{
+  Item
+  {
+    Name "KR 180 R3200-2 PA"
+    Icon "layout_icon.tga"
+    PreviewIcon "component_icon_preview.tga"
+    Description "KUKA KR 180 R3200-2 PA"
+    Logo ""
+    Uri "component.rsc"
+  }
+}

@@ -1,0 +1,19 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v5.2.0)
+
+newmtl vc_default
+Kd 0.498039246 0.498039246 0.498039246
+Ka 0.498039246 0.498039246 0.498039246
+Ks 0.498039246 0.498039246 0.498039246
+Ke 0 0 0
+d 1
+illum 1
+
+newmtl black
+Kd 0.176470593 0.176470593 0.176470593
+Ka 0 0 0
+Ks 0.745098054 0.745098054 0.745098054
+Ke 0 0 0
+d 1
+illum 1
+

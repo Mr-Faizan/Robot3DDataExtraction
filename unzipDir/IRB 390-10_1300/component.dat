@@ -1,0 +1,71 @@
+VcId "96e14869-790e-4d11-ae95-d2772d0b7cb8"
+Revision 112
+DetailedRevision "4.4.0.112"
+Tags "Delta"
+KeywordMap
+{
+  Keyword
+  {
+    Key "ModelType"
+    Value "Component"
+  }
+  Keyword
+  {
+    Key "Type"
+    Value "Robots"
+  }
+  Keyword
+  {
+    Key "Manufacturer"
+    Value "ABB"
+  }
+  Keyword
+  {
+    Key "MaxPayload"
+    Value "10"
+  }
+  Keyword
+  {
+    Key "Author"
+    Value "Visual Components"
+  }
+  Keyword
+  {
+    Key "Reach"
+    Value "1300"
+  }
+  Keyword
+  {
+    Key "IsDeprecated"
+    Value "False"
+  }
+}
+Items
+{
+  Item
+  {
+    Name "IRB 390-10/1300"
+    Icon "layout_icon.tga"
+    PreviewIcon "component_icon_preview.tga"
+    Description "\nThe robots can be programmed in the programming tab. In t\
+he case of conceptual layouts, the robots can utilize robot controllers to a\
+utomatically perform tasks.\nAll the robots have a similar component structu\
+re and therefore they mostly support same features and they are easily repla\
+ceable with each other.\n\n### How to use – Program tab ###\nMove the robo\
+t with the “Jog” tool and create the motion statements in the “Program\
+ Editor”. The created statements will have configurable properties as well\
+.\nFor grasping/releasing products, changing tools, and other actions., see \
+the “Signal Actions” and “Actions Configurations” properties for fur\
+ther customization.\n\n### How to use – Robot Controller ###\nRobot contro\
+llers, such as, “Process Modeling Robot Controller” component can be use\
+d to automate robot programming. See our academy lessons for further instruc\
+tions.\n\n### How to use – OLP ###\nWe provide post-processors and pre-pro\
+cessors for continuously expanding group of robot vendors in our forum. In a\
+ddition, we have some advanced robot statements available in the forum.\n\n#\
+## Key Properties ###\nExecutor::IsEnabled = Determines if the robot is turn\
+ed ON / OFF\nExecutor::IsLooping = Determines if the robot program is looped\
+ when the program is run in programming tab\n    "
+    Logo ""
+    Uri "component.rsc"
+  }
+}

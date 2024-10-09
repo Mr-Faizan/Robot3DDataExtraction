@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VcModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1" xmlns="http://schemas.visualcomponents.com/2017/01/component/componentxml">
+  <Properties>
+    <Property name="VCID">96e14869-790e-4d11-ae95-d2772d0b7cb8</Property>
+    <Property name="ModelType">Component</Property>
+    <Property name="Name">IRB 390-10/1300</Property>
+    <Property name="Description">
+The robots can be programmed in the programming tab. In the case of conceptual layouts, the robots can utilize robot controllers to automatically perform tasks.
+All the robots have a similar component structure and therefore they mostly support same features and they are easily replaceable with each other.
+
+### How to use – Program tab ###
+Move the robot with the “Jog” tool and create the motion statements in the “Program Editor”. The created statements will have configurable properties as well.
+For grasping/releasing products, changing tools, and other actions., see the “Signal Actions” and “Actions Configurations” properties for further customization.
+
+### How to use – Robot Controller ###
+Robot controllers, such as, “Process Modeling Robot Controller” component can be used to automate robot programming. See our academy lessons for further instructions.
+
+### How to use – OLP ###
+We provide post-processors and pre-processors for continuously expanding group of robot vendors in our forum. In addition, we have some advanced robot statements available in the forum.
+
+### Key Properties ###
+Executor::IsEnabled = Determines if the robot is turned ON / OFF
+Executor::IsLooping = Determines if the robot program is looped when the program is run in programming tab
+    </Property>
+    <Property name="Type">Robots</Property>
+    <Property name="Manufacturer">ABB</Property>
+    <Property name="MaxPayload">10</Property>
+    <Property name="Author">Visual Components</Property>
+    <Property name="Tags">Delta</Property>
+    <Property name="Revision">112</Property>
+    <Property name="DetailedRevision">4.4.0.112</Property>
+    <Property name="Reach">1300</Property>
+    <Property name="IsDeprecated">False</Property>
+  </Properties>
+  <ModelUrl>component.rsc</ModelUrl>
+  <ThumbnailImageUrl>layout_icon.tga</ThumbnailImageUrl>
+  <PreviewImageUrl>component_icon_preview.tga</PreviewImageUrl>
+</VcModel>

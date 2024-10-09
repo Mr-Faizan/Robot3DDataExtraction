@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VcModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1" xmlns="http://schemas.visualcomponents.com/2017/01/component/componentxml">
+  <Properties>
+    <Property name="VCID">80e00666-3846-42fc-b442-c54beb7e8e5d</Property>
+    <Property name="ModelType">Component</Property>
+    <Property name="Name">QRC 350-E</Property>
+    <Property name="Description">
+The robots can be programmed in the programming tab. In the case of conceptual layouts, the robots can utilize robot controllers to automatically perform tasks.
+All the robots have a similar component structure and therefore they mostly support same features and they are easily replaceable with each other.
+
+### How to use – Program tab ###
+Move the robot with the “Jog” tool and create the motion statements in the “Program Editor”. The created statements will have configurable properties as well.
+For grasping/releasing products, changing tools, and other actions., see the “Signal Actions” and “Actions Configurations” properties for further customization.
+
+### How to use – Robot Controller ###
+Robot controllers, such as, “Process Modeling Robot Controller” component can be used to automate robot programming. See our academy lessons for further instructions.
+
+### How to use – OLP ###
+We provide post-processors and pre-processors for continuously expanding group of robot vendors in our forum. In addition, we have some advanced robot statements available in the forum.
+
+### Key Properties ###
+Executor::IsEnabled = Determines if the robot is turned ON / OFF
+Executor::IsLooping = Determines if the robot program is looped when the program is run in programming tab
+    </Property>
+    <Property name="Type">Robots</Property>
+    <Property name="Manufacturer">CLOOS</Property>
+    <Property name="MaxPayload">15</Property>
+    <Property name="Author">Visual Components</Property>
+    <Property name="Tags">7-Axis;Arc Welding;Articulated</Property>
+    <Property name="Revision">3</Property>
+    <Property name="DetailedRevision">4.5.0.3</Property>
+    <Property name="Reach">2580</Property>
+    <Property name="ImageUri">component_icon_preview.tga</Property>
+    <Property name="Modified">3/23/2021 12:45:29 PM</Property>
+    <Property name="IsDeprecated">False</Property>
+    <Property name="ThumbnailUri">layout_icon.tga</Property>
+  </Properties>
+  <ModelUrl>component.rsc</ModelUrl>
+  <ThumbnailImageUrl>layout_icon.tga</ThumbnailImageUrl>
+  <PreviewImageUrl>component_icon_preview.tga</PreviewImageUrl>
+</VcModel>

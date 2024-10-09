@@ -3,12 +3,20 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <filesystem>
 #include <nlohmann/json.hpp>
+#include <regex>
 
 // I Need to install nlohmann/json library
 
 using namespace std;
 using json = nlohmann::json;
+namespace fs = std::filesystem;
+
+
+// DOF regex to match the DOF section
+std::regex dofRegex(R"(Dof  \"(Rotational|Custom|RotationalFollower|Translational)\")");
+std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallellogram)\")");
 
 // In this RscToJsonParser class i will extract the most important data from the .rsc file and convert it to a json file.
 // This data will be used for the robot simulation in QT 3D Studio.
@@ -40,13 +48,11 @@ using json = nlohmann::json;
     }
 
 
-
-
     // This function will process the line and extract the data
     void RscToJsonParser::processLine(string& line, ifstream& file) {
         line.erase(0, line.find_first_not_of(" \t")); // Trim leading whitespace
 
-        if (line.find("Functionality \"rKinArticulated2\"") != string::npos) {
+        if (std::regex_search(line, KinematicsRegex)) {
             isKinematicsSection = true;
             isJointMapSection = false;
             return;
@@ -58,7 +64,7 @@ using json = nlohmann::json;
             return;
         }
 
-        if (line.find("Dof  \"Rotational\"") != string::npos) {
+        if (std::regex_search(line, dofRegex)) {
             isDofSection = true;
             foundNameInDOFsection = false;
             return;
@@ -132,6 +138,7 @@ using json = nlohmann::json;
 
             // Convert numeric values to appropriate types
             if (value.find_first_not_of("0123456789.-") == string::npos) {
+                try {
                 if (value.find('.') != string::npos) {
                     if (isKinematicsSection) {
                         kinematics[key] = stod(value);
@@ -144,6 +151,11 @@ using json = nlohmann::json;
                     } else if (isJointMapSection) {
                         jointMap[key] = stoi(value);
                     }
+                }
+                } catch (const std::invalid_argument& e) {
+                    cerr << "Invalid argument for stoi: " << value << endl;
+                } catch (const std::out_of_range& e) {
+                    cerr << "Out of range for stoi: " << value << endl;
                 }
             } else {
                 if (isKinematicsSection) {
@@ -276,4 +288,34 @@ using json = nlohmann::json;
             }
         }
     }
+
+
+
+void RscToJsonParser::processAllFiles(const string& unzipDir, const string& jsonDir) {
+    for (const auto& entry : fs::directory_iterator(unzipDir)) {
+        if (entry.is_directory()) {
+            string subDir = entry.path().string();
+            string componentFilePath = subDir + "/component.rsc";
+            if (fs::exists(componentFilePath)) {
+                try {
+                    RscToJsonParser parser(componentFilePath);
+                    json rscJson = parser.parse();
+
+                    string subDirName = entry.path().filename().string();
+                    string outputSubDir = jsonDir + "/" + subDirName;
+                    fs::create_directories(outputSubDir);
+
+                    string outputFilePath = outputSubDir + "/component.json";
+                    ofstream outputFile(outputFilePath);
+                    outputFile << rscJson.dump(4); // Pretty print with 4 spaces indent
+                    outputFile.close();
+
+                    cout << "Processed: " << componentFilePath << " -> " << outputFilePath << endl;
+                } catch (const exception& e) {
+                    cerr << "Error processing file " << componentFilePath << ": " << e.what() << endl;
+                }
+            }
+        }
+    }
+}
 
