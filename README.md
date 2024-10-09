@@ -1,4 +1,4 @@
-# vcmxToJson Project
+# Robot3DDataExtraction Project
 
 ## Overview
 This project processes robot simulation data by performing the following steps:
