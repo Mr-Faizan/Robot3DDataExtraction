@@ -34,8 +34,8 @@ This project processes robot simulation data by performing the following steps:
 
 4. **Clone the repository:**
    ```sh
-   git clone https://github.com/Mr-Faizan/vcmx-to-yaml.git
-   cd vcmx-to-yaml
+   git clone https://github.com/Mr-Faizan/Robot3DDataExtraction.git
+   cd Robot3DDataExtraction
    ```
 
 5. **Build the project:**
