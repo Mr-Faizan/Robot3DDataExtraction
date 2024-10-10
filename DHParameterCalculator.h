@@ -8,6 +8,7 @@ class DHParameterCalculator {
 public:
     DHParameterCalculator(const std::string& inputFilename, const std::string& outputFilename);
     void calculateDHParameters();
+    static void processAllFiles(const std::string& jsonDir, const std::string& outputDir);
 
 private:
     std::string inputFilename;

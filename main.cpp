@@ -36,8 +36,7 @@ int main() {
 
 
         // Step 4: Run DHParameterCalculator
-        DHParameterCalculator calculator("jsonDir/newClasscomponent.json", "jsonDir/dhParameters.json");
-        calculator.calculateDHParameters();
+        DHParameterCalculator::processAllFiles(jsonDir, outputDir);
         cout << "Step 4: DH parameters calculation completed successfully!" << endl;
 
 

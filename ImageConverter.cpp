@@ -24,13 +24,13 @@ void ImageConverter::convert3DSToOBJ(const std::string& inputFilePath, const std
 
     const aiScene* scene = importer.ReadFile(inputFilePath, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
     if (!scene) {
-        std::cerr << "Error importing 3DS file: " << importer.GetErrorString() << std::endl;
+       // std::cerr << "Error importing 3DS file: " << importer.GetErrorString() << std::endl;
         return;
     }
 
     Assimp::Exporter exporter;
     if (exporter.Export(scene, "obj", outputFilePath) != AI_SUCCESS) {
-        std::cerr << "Error exporting OBJ file: " << exporter.GetErrorString() << std::endl;
+         std::cerr << "Error exporting OBJ file: " << exporter.GetErrorString() << std::endl;
     }
 }
 
@@ -45,7 +45,7 @@ void ImageConverter::processNewFiles() {
                 if (extension.empty()) {
                     newFilePath += ".3ds";
                     fs::rename(filePath, newFilePath);
-                    std::cout << "Renamed: " << filePath << " -> " << newFilePath << std::endl;
+                    //std::cout << "Renamed: " << filePath << " -> " << newFilePath << std::endl;
                 }
 
                 std::string subDirName = entry.path().parent_path().filename().string();

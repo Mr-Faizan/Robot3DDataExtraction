@@ -52,7 +52,8 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
     void RscToJsonParser::processLine(string& line, ifstream& file) {
         line.erase(0, line.find_first_not_of(" \t")); // Trim leading whitespace
 
-        if (std::regex_search(line, KinematicsRegex)) {
+         if (std::regex_search(line, KinematicsRegex)) {
+            //if (line.find("Functionality \"rKinArticulated2\"") != string::npos) {
             isKinematicsSection = true;
             isJointMapSection = false;
             return;
@@ -65,16 +66,17 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
         }
 
         if (std::regex_search(line, dofRegex)) {
+            //if (line.find("Dof  \"Rotational\"") != string::npos) {
             isDofSection = true;
             foundNameInDOFsection = false;
             return;
         }
-
+/*
         if (line.find("Dof \"Fixed\"") != string::npos) {
             isDofFixedSection = true;
             return;
         }
-
+*/
         if (isDofSection && line.find("}") != string::npos) {
             isDofSection = false;
             captureNextOffset = true;
@@ -84,6 +86,8 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
         if (captureNextOffset && line.find("Offset") != string::npos) {
             isOffsetSection = true;
             captureNextOffset = false;
+
+            //cout << "Offset section Case 1" << endl;
             return;
         }
 
@@ -93,12 +97,13 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
         }
 
         if (isKinematicsSection || isJointMapSection) {
+           // cout << "isKinematicsSection Section Case 0" << endl;
             processKinematicsOrJointMapSection(line);
-        } else if (isDofFixedSection) {
-            // Handle DOF Fixed section if needed
         } else if (isGeometryMatrixSection) {
+            // cout << "isGeometryMatrixSection Section Case 0" << endl;
             processGeometryMatrixSection(line);
         } else {
+           // cout << "process other section Case 1" << endl;
             processOtherSections(line, file);
         }
 
@@ -137,7 +142,7 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
             }
 
             // Convert numeric values to appropriate types
-            if (value.find_first_not_of("0123456789.-") == string::npos) {
+            if (!value.empty() && value.find_first_not_of("0123456789.-") == string::npos) {
                 try {
                 if (value.find('.') != string::npos) {
                     if (isKinematicsSection) {
@@ -158,6 +163,7 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
                     cerr << "Out of range for stoi: " << value << endl;
                 }
             } else {
+
                 if (isKinematicsSection) {
                     kinematics[key] = value;
                 } else if (isJointMapSection) {
@@ -170,33 +176,31 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
     // This function will process the other sections like Dof, Offset and GeometryMatrix
     void RscToJsonParser::processOtherSections(const string& line, ifstream& file) {
         if (isDofSection) {
-            if (line.find("}") != string::npos) {
-                isDofSection = false;
-                captureNextOffset = true;
-                return;
-            }
 
             if (!foundNameInDOFsection && line.find("Name") != string::npos) {
                 auto pos = line.find(" ");
                 if (pos != string::npos) {
                     currentJointName = line.substr(pos + 1);
-
+                   // cout << "Offset section Case 2 Name found" << endl;
                     if (currentJointName.size() > 1 && currentJointName.front() == '\"' && currentJointName.back() == '\"') {
                         currentJointName = currentJointName.substr(1, currentJointName.size() - 2);
                     }
                     foundNameInDOFsection = true;
                 }
             }
+
         }
 
         if (isOffsetSection) {
             processOffsetSection(line, file);
         }
+
     }
 
     // This function will process the Offset section
     void RscToJsonParser::processOffsetSection(const string& line, ifstream& file) {
         string offsetLine = line;
+       // cout << "Offset section Case 3 processoffsetSection" << endl;
         offsetLine.erase(0, offsetLine.find_first_not_of(" \t")); // Trim leading whitespace
         if (offsetLine.find("Expression") != string::npos) {
             auto pos = offsetLine.find(" ");
@@ -217,11 +221,14 @@ std::regex KinematicsRegex(R"(Functionality\s*\"(rKinArticulated2|rKinParallello
                 if (currentOffsetExpression.size() > 1 && currentOffsetExpression.front() == '\"' && currentOffsetExpression.back() == '\"') {
                     currentOffsetExpression = currentOffsetExpression.substr(1, currentOffsetExpression.size() - 2);
                 }
+              //  cout << "Offset section Case 4 currentoffsetexpression = " + currentOffsetExpression << endl;
             }
         }
         if (offsetLine.find("}") != string::npos) {
             if (!currentJointName.empty() && !currentOffsetExpression.empty()) {
                 jointOffset[currentJointName] = currentOffsetExpression;
+                // cout << "Offset section Case 5 currentJointName = " + currentJointName << endl;
+
             }
             currentJointName.clear();
             currentOffsetExpression.clear();
